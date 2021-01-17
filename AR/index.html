@@ -12,8 +12,15 @@
         <a-marker type='pattern' url="./marker/pattern-marker.patt">
             <a-entity
             position="0 0 0"
-            scale="1 1 1"
+            scale="2 2 2"
             gltf-model="#GEMS"
+			animation="property: rotation;
+			    from: 0 0 0;
+				to: 0 720 360;
+				dir: normal;
+				dur: 10000;
+				loop: true;
+				easing: linear"
             ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
