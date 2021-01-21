@@ -30,13 +30,22 @@
           position="0 0 0"
           color="red" 
           depth="0.5" width="0.5" height="10"></a-box>
-      <a-entity id="player"
+   <!--   <a-entity id="player"
           camera
           universal-controls
 		  look-controls
           kinematic-body
           position="-20 10.8 20">
-      </a-entity>
+      </a-entity>-->
+	  
+	  <a-entity id="rig"
+      universal-controls
+	  kinematic-body
+      position="-20 10.8 20">
+  <a-entity camera
+            position="0 1.6 0"
+            look-controls></a-entity>
+</a-entity>
       <!-- birds-eye view box to stand on -->
       <!-- lower platform -->
       <a-box static-body 
