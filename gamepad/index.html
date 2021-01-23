@@ -7,6 +7,8 @@
 <title>VR でゲームパッドを使う</title>
 <!-- A-Frame を使うための外部スクリプトの読み込み -->
 <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
 </head>
 
 <body>
@@ -59,10 +61,10 @@
         color="rgb(127, 127, 127)">
     </a-sky>
 
-    <!-- カメラを操作する a-camera タグ -->
-    <a-camera  id="cam">        <!-- ★a-camera に id を設定 -->
-        <a-cursor></a-cursor>   <!-- インタラクションするための a-cursor（視線カーソル）タグ -->
-    </a-camera>
+    <a-entity camera universal-controls>
+	<a-cursor></a-cursor>
+	</a-entity>
+	
 </a-scene>
 
 <script>
@@ -89,5 +91,6 @@ function loop() {
 window.addEventListener("gamepadconnected", loop);  // ゲームパッドが接続されたら loop 開始
 if(!window.ongamepadconnected) { loop(); }          // Chrome はイベントが起きないので直接 loop 開始
 </script>
+
 </body>
 </html>
