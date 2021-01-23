@@ -36,7 +36,8 @@ if(!window.ongamepadconnected) { loop(); }          // Chrome はイベントが
 
     <!-- see: https://github.com/donmccurdy/aframe-physics-system -->
   	<!-- to see wireframes, set physics='debug: true' -->
-    <a-scene stats physics>
+	<!-- put stats to show status -->
+    <a-scene physics>
         <a-assets>
             <img id="sky" src="./obj/milkyway-nasa.png">
 	     	<a-asset-item id="GEMS" src="./obj/GEMS.gltf"></a-asset-item>
@@ -138,6 +139,7 @@ if(!window.ongamepadconnected) { loop(); }          // Chrome はイベントが
 <!-- player -->
         <a-entity id="player"
             camera
+			look-controls
             universal-controls
             kinematic-body
             position="-0 1.8 2">
