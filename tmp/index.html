@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> tmp1 </title>
+  <title> tmp11 </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <!-- 3つのライブラリを読み込む -->
@@ -55,9 +55,10 @@
       ctx.clearRect(0,0,canvas.width,canvas.height);
       ctx.drawImage(results.image,0,0,canvas.width,canvas.height);      
       
-      if(results.multiHandLandmarks) {
+      //if(results.multiHandLandmarks) {
+      if(Object.values(results.multiHandLandmarks).length) {
         console.log(results.multiHandLandmarks);
-        //console.log(results.multiHandLandmarks[0]["8"]);
+        //console.log(results.multiHandLandmarks[0][8]);
 
         
         results.multiHandLandmarks.forEach(marks => {
