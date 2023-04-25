@@ -54,6 +54,8 @@
       
       if(results.multiHandLandmarks) {
         results.multiHandLandmarks.forEach(marks => {
+          console.log(results)
+            
           // 緑色の線で骨組みを可視化
           drawConnectors(ctx, marks, HAND_CONNECTIONS, {color: '#0f0'});
 
