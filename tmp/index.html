@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> tmp11 </title>
+  <title> tmp </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <!-- 3つのライブラリを読み込む -->
@@ -57,9 +57,7 @@
       
       //if(results.multiHandLandmarks) {
       if(Object.values(results.multiHandLandmarks).length) {
-        console.log(results.multiHandLandmarks);
-        //console.log(results.multiHandLandmarks[0][8]);
-
+        console.log(results.multiHandLandmarks[0][8].x);
         
         results.multiHandLandmarks.forEach(marks => {
             
