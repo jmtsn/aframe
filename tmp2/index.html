@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>pad1</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script> -->
+    <!-- <script src="js.js"></script> -->
+ </head>
+
+  <style>
+  .btnsyl{
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5%
+  }
+  </style>
+ 
+  <body>
+
+  <!-- <div id="btntext" class="text" > -->
+    <!-- <p style="font-size:1em; text-align: center; margin: 0px; background-color: red;">Reload</p> -->
+  <!-- </div> -->
+  
+    <!-- <a-scene　vr-mode-ui="enabled: false" > -->
+    <a-scene>
+    
+      <!-- <a-entity id="rig" movement-controls="fly: true; speed: 0.3"> -->
+      <!-- <a-entity id="rig" movement-controls="fly: true; speed: 0.3"> -->
+        <!-- <a-entity camera position="0 0 2" rotation="0 0 0"> -->
+        <a-entity rotation="270 0 0" position="0 2 0">
+        <a-entity camera look-controls wasd-controls="acceleration:10; wsAxis: y; adAxis: x; adInverted: true" rotation="0 0 0">
+             <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
+        </a-entity>
+      </a-entity>
+      
+      
+      
+      <!-- <a-plane position="2 2 -5" width="2" height="1" material="shader:html; text: #btntext;"> -->
+      <!-- </a-plane> --> 
+      
+      <a-sphere color="yellow" radius="0.05" position="0 0 0" shadow="receive: true"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: yellow;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
+      
+     <a-plane position="0 -1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+      <!-- <a-box position="-1 0.5 -3" color="#4CC3D9" shadow="receive: true" -->
+          <!-- animation="property: rotation; -->
+          <!-- to: 0 360 0; -->
+          <!-- dur: 3000; -->
+          <!-- loop: true; -->
+          <!-- easing: linear; -->
+          <!-- startEvents: mouseenter; -->
+          <!-- "> -->
+      <!-- </a-box> -->
+
+
+
+    </a-scene>
+
+              <button id="btnid" class="btnsyl">Restart</button>
+
+
+  </body>
+
+<script>
+
+let clickEvent = new MouseEvent('dblclick',{
+    screenX: 1
+    screenY: 1
+    })
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let btn = document.getElementById("btnid");
+
+btn.addEventListener('click', () => {
+    var controls = document.querySelector('a-entity[camera]')
+    controls.components['look-controls'].pitchObject.rotation.x = 0 //- * ( Math.PI / 180 )
+    controls.components['look-controls'].yawObject.rotation.y = 0
+    controls.setAttribute("position",{x:0, y:0, z:0})
+    controls.dispatchEvent(clickEvent);
+    return;
+});
+
+}, false);
+
+</script>
+
+</html>
+
+ 
