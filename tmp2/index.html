@@ -30,28 +30,34 @@
  
   <body>
 
-  <!-- <div id="btntext" class="text" > -->
-    <!-- <p style="font-size:1em; text-align: center; margin: 0px; background-color: red;">Reload</p> -->
-  <!-- </div> -->
   
     <!-- <a-scene　vr-mode-ui="enabled: false" > -->
     <a-scene>
     
-      <!-- <a-entity id="rig" movement-controls="fly: true; speed: 0.3"> -->
-      <!-- <a-entity id="rig" movement-controls="fly: true; speed: 0.3"> -->
-        <!-- <a-entity camera position="0 0 2" rotation="0 0 0"> -->
         <a-entity rotation="270 0 0" position="0 2 0">
-        <a-entity camera look-controls wasd-controls="acceleration:10; wsAxis: y; adAxis: x; adInverted: true" rotation="0 0 0">
+        <a-entity camera look-controls gamepad-controls >
              <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
         </a-entity>
       </a-entity>
       
       
+      <a-sphere color="red" radius="0.05" position="0 0 0" shadow="receive: true"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: red;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
       
-      <!-- <a-plane position="2 2 -5" width="2" height="1" material="shader:html; text: #btntext;"> -->
-      <!-- </a-plane> --> 
       
-      <a-sphere color="yellow" radius="0.05" position="0 0 0" shadow="receive: true"
+      <a-sphere color="yellow" radius="0.05" position="1 0 0" shadow="receive: true"
           animation__1="property: components.material.material.color;
           type: color;
           to: blue;
@@ -66,7 +72,22 @@
           >
       </a-sphere>
       
-     <a-plane position="0 -1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sphere color="yellow" radius="0.05" position="0 0 -1" shadow="receive: true"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: yellow;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
+      
+     <a-plane position="0 -0.1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
       <!-- <a-box position="-1 0.5 -3" color="#4CC3D9" shadow="receive: true" -->
           <!-- animation="property: rotation; -->
@@ -89,10 +110,23 @@
 
 <script>
 
-let clickEvent = new MouseEvent('dblclick',{
-    screenX: 1
-    screenY: 1
-    })
+function handleConnect(e) {
+  console.log('connect');
+  console.log(navigator.getGamepads())
+  addGamepadIfNew(e.gamepad);
+}
+
+function handleDisconnect(e) {
+  console.log('disconnect');
+  removeGamepad(e.gamepad);
+}
+
+window.addEventListener("gamepadconnected", handleConnect);
+window.addEventListener("gamepaddisconnected", handleDisconnect);
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -100,8 +134,8 @@ let btn = document.getElementById("btnid");
 
 btn.addEventListener('click', () => {
     var controls = document.querySelector('a-entity[camera]')
-    controls.components['look-controls'].pitchObject.rotation.x = 0 //- * ( Math.PI / 180 )
-    controls.components['look-controls'].yawObject.rotation.y = 0
+    controls.components['look-controls'].pitchObject.rotation.x = 0 * ( Math.PI / 180 )
+    controls.components['look-controls'].yawObject.rotation.y = 0 * ( Math.PI / 180 )
     controls.setAttribute("position",{x:0, y:0, z:0})
     controls.dispatchEvent(clickEvent);
     return;
