@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad11</title>
+    <title>pad1</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <!-- <script src="js.js"></script> -->
@@ -27,123 +27,8 @@
     bottom: 5%
   }
   </style>
- 
-  <body>
 
-  
-    <a-scene　vr-mode-ui="enabled: false" >
-    <!-- <a-scene> -->
-    
-        <a-entity id="rig" rotation="270 0 0" position="0 2 0" rotation-controls movement-controls="speed:0.1">
-        <a-entity id="camera" camera look-controls="magicWindowTrackingEnabled: false; touch1Enabled: false" >
-             <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
-        </a-entity>
-      </a-entity>
-      
-      
-      <a-sphere color="red" radius="0.05" position="0 0 0" shadow="receive: true"
-          animation__1="property: components.material.material.color;
-          type: color;
-          to: blue;
-          dur: 200;
-          startEvents: mouseenter;"
-          
-          animation__0="property: components.material.material.color;
-          type: color;
-          to: red;
-          dur: 200;
-          startEvents: mouseleave;"
-          >
-      </a-sphere>
-      
-      
-      <a-sphere color="yellow" radius="0.05" position="1 0 0" shadow="receive: true"
-          animation__1="property: components.material.material.color;
-          type: color;
-          to: blue;
-          dur: 200;
-          startEvents: mouseenter;"
-          
-          animation__0="property: components.material.material.color;
-          type: color;
-          to: yellow;
-          dur: 200;
-          startEvents: mouseleave;"
-          >
-      </a-sphere>
-      
-      <a-sphere color="yellow" radius="0.05" position="0 0 -1" shadow="receive: true"
-          animation__1="property: components.material.material.color;
-          type: color;
-          to: blue;
-          dur: 200;
-          startEvents: mouseenter;"
-          
-          animation__0="property: components.material.material.color;
-          type: color;
-          to: yellow;
-          dur: 200;
-          startEvents: mouseleave;"
-          >
-      </a-sphere>
-      
-     <a-plane position="0 -0.1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-
-      <!-- <a-box position="-1 0.5 -3" color="#4CC3D9" shadow="receive: true" -->
-          <!-- animation="property: rotation; -->
-          <!-- to: 0 360 0; -->
-          <!-- dur: 3000; -->
-          <!-- loop: true; -->
-          <!-- easing: linear; -->
-          <!-- startEvents: mouseenter; -->
-          <!-- "> -->
-      <!-- </a-box> -->
-
-
-
-    </a-scene>
-
-              <button id="btnid" class="btnsyl">Restart</button>
-
-
-  </body>
-
-<script>
-
-function handleConnect(e) {
-  console.log('connect');
-  console.log(navigator.getGamepads())
-  addGamepadIfNew(e.gamepad);
-}
-
-function handleDisconnect(e) {
-  console.log('disconnect');
-  removeGamepad(e.gamepad);
-}
-
-window.addEventListener("gamepadconnected", handleConnect);
-window.addEventListener("gamepaddisconnected", handleDisconnect);
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function(){
-
-let btn = document.getElementById("btnid");
-
-btn.addEventListener('click', () => {
-    var controls = document.querySelector('a-entity[camera]')
-    controls.components['look-controls'].pitchObject.rotation.x = 0 * ( Math.PI / 180 )
-    controls.components['look-controls'].yawObject.rotation.y = 0 * ( Math.PI / 180 )
-    controls.setAttribute("position",{x:0, y:0, z:0})
-    controls.dispatchEvent(clickEvent);
-    return;
-});
-
-}, false);
-
-</script>
+<body>
 
 <script>
 // run with look-controls component(camera) and movement-controls component(rig)
@@ -253,6 +138,75 @@ module.exports.Component = AFRAME.registerComponent("rotation-controls", {
   }
 });
 </script>
+
+ 
+
+
+  
+    <!-- <a-scene　vr-mode-ui="enabled: false" > -->
+    <a-scene>
+    
+        <a-entity id="rig" rotation="270 0 0" position="0 2 0" rotation-controls="enabed" movement-controls="speed:0.1">
+        <a-entity camera look-controls="magicWindowTrackingEnabled: false; touch1Enabled: false" >
+             <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
+        </a-entity>
+      </a-entity>
+      
+      
+      <a-sphere color="red" radius="0.05" position="0 0 0" shadow="receive: true"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: red;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
+      
+      
+      <a-sphere color="yellow" radius="0.05" position="1 0 0" shadow="receive: true"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: yellow;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
+      
+      <a-sphere color="yellow" radius="0.05" position="0 0 -1" shadow="receive: true"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: yellow;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
+      
+     <a-plane position="0 -0.1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+    </a-scene>
+
+              <button id="btnid" class="btnsyl">Restart</button>
+
+
+  </body>
 
 
 </html>
