@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad2</title>
+    <title>pad333</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <!-- <script src="js.js"></script> -->
@@ -31,6 +31,8 @@
 <body>
 
 <script>
+const JOYSTICK_EPS = 0.2;
+
 AFRAME.registerComponent("rotation-controls", {
   schema: {
     // Controller 0-3
