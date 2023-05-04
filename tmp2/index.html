@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad</title>
+    <title>padaaa</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <!-- <script src="js.js"></script> -->
@@ -31,6 +31,8 @@
 <body>
 
 <script>
+
+
 const JOYSTICK_EPS = 0;
 
 AFRAME.registerComponent("rotation-controls", {
@@ -89,11 +91,8 @@ AFRAME.registerComponent("rotation-controls", {
     controls.components['look-controls'].yawObject.rotation.y = lookVector.y
     
     var pad = navigator.getGamepads(); 
-    var log = document.getElementById("log");
-    log.innerHTML = "a0: " + pad[0].axes[0] + "　" 
-    log.innerHTML = + pad[0].axes[1] + "　" 
-    log.innerHTML = + pad[0].axes[2] + "　" 
-    log.innerHTML = + pad[0].axes[3]  
+    <!-- log.components[value] = "a0: " + pad[0].axes[0]  -->
+    <!-- log.components[value] = "a0: "  -->
     
   },
 
@@ -154,21 +153,39 @@ AFRAME.registerComponent("rotation-controls", {
 });
 
 
+
+
+
+<!-- text -->
+AFRAME.registerComponent('mapping', {
+
+  init: function(){
+    
+    var pad = navigator.getGamepads(); 
+    
+
+    this.el.setAttribute("text", 'value', pad[0].axes);
+    this.el.setAttribute('position', "0 0.2 0");
+    this.el.setAttribute('rotation', "270 0 0");
+
+  }
+
+})
+
+
+
 </script>
-
- 
-<div id="log" class="btnsyl">ここにデータを表示</div>
-
   
     <!-- <a-scene　vr-mode-ui="enabled: false" > -->
     <a-scene>
-    
+
         <a-entity id="rig" rotation="270 0 0" position="0 2 0" rotation-controls="enabed" >
         <a-entity camera look-controls="magicWindowTrackingEnabled: false; touchEnabled: false" >
              <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
         </a-entity>
       </a-entity>
       
+      <a-text mapping value="not connnected" width=3></a-text>
       
       <a-sphere color="red" radius="0.05" position="0 0 0" shadow="receive: true"
           animation__1="property: components.material.material.color;
@@ -222,7 +239,23 @@ AFRAME.registerComponent("rotation-controls", {
 
               <!-- <button id="btnid" class="btnsyl">Restart</button> -->
 
+<script>
 
+document.addEventListener("DOMContentLoaded", function(){
+
+let btn = document.getElementById("btnid");
+
+btn.addEventListener('click', () => {
+    var controls = document.querySelector('a-entity[camera]')
+    controls.components['look-controls'].pitchObject.rotation.x = 0 //- * ( Math.PI / 180 )
+    controls.components['look-controls'].yawObject.rotation.y = 0
+    controls.setAttribute("position",{x:0, y:0, z:0})
+    return;
+});
+
+}, false);
+
+</script>
 
 
   </body>
