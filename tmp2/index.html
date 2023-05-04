@@ -35,7 +35,7 @@
 
 const JOYSTICK_EPS = 0.2;
 
-module.exports.Component = AFRAME.registerComponent("rotation-controls", {
+AFRAME.registerComponent("rotation-controls", {
   schema: {
     // Controller 0-3
     controller: { default: 0, oneOf: [0, 1, 2, 3] },
