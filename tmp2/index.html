@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad</title>
+    <title>pad1</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <!-- <script src="js.js"></script> -->
@@ -31,10 +31,6 @@
 <body>
 
 <script>
-// run with look-controls component(camera) and movement-controls component(rig)
-
-const JOYSTICK_EPS = 0.2;
-
 AFRAME.registerComponent("rotation-controls", {
   schema: {
     // Controller 0-3
@@ -137,6 +133,8 @@ AFRAME.registerComponent("rotation-controls", {
     return this.getGamepad().id;
   }
 });
+
+
 </script>
 
  
@@ -204,6 +202,24 @@ AFRAME.registerComponent("rotation-controls", {
     </a-scene>
 
               <button id="btnid" class="btnsyl">Restart</button>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let btn = document.getElementById("btnid");
+
+btn.addEventListener('click', () => {
+    var controls = document.querySelector('a-entity[camera]')
+    controls.components['look-controls'].pitchObject.rotation.x = 0 //- * ( Math.PI / 180 )
+    controls.components['look-controls'].yawObject.rotation.y = 0
+    controls.setAttribute("position",{x:0, y:0, z:0})
+    return;
+});
+
+}, false);
+
+</script>
 
 
   </body>
