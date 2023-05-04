@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>padaaa</title>
+    <title>pad111</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <!-- <script src="js.js"></script> -->
@@ -84,16 +84,24 @@ AFRAME.registerComponent("rotation-controls", {
     <!-- lookVector.multiplyScalar(this.data.rotationSensitivity * dt / 1000); -->
     <!-- this.el.object3D.rotation.y -= lookVector.x; -->
 
+
+
+<!-- text -->
+AFRAME.registerComponent('mapping', {
+
+  init: function(){
+    
     const lookVector = this._lookVector;
     this.getJoystick(lookVector);
-    var controls = document.querySelector('a-entity[camera]')
-    controls.components['look-controls'].pitchObject.rotation.x = lookVector.x
-    controls.components['look-controls'].yawObject.rotation.y = lookVector.y
-    
-    var pad = navigator.getGamepads(); 
-    <!-- log.components[value] = "a0: " + pad[0].axes[0]  -->
-    <!-- log.components[value] = "a0: "  -->
-    
+
+    this.el.setAttribute("text", 'value', lookVector);
+    this.el.setAttribute('position', "0 0.2 0");
+    this.el.setAttribute('rotation', "270 0 0");
+
+  }
+
+})
+  
   },
 
   /**
@@ -156,21 +164,6 @@ AFRAME.registerComponent("rotation-controls", {
 
 
 
-<!-- text -->
-AFRAME.registerComponent('mapping', {
-
-  init: function(){
-    
-    var pad = navigator.getGamepads(); 
-    
-
-    this.el.setAttribute("text", 'value', pad[0].axes);
-    this.el.setAttribute('position', "0 0.2 0");
-    this.el.setAttribute('rotation', "270 0 0");
-
-  }
-
-})
 
 
 
