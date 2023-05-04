@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad333</title>
+    <title>pad</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <!-- <script src="js.js"></script> -->
@@ -75,12 +75,20 @@ AFRAME.registerComponent("rotation-controls", {
     if (!this.isRotationActive()) return;
     //this.el.object3D.rotation.y += 1
 
+    <!-- const lookVector = this._lookVector; -->
+    <!-- this.getJoystick(lookVector); -->
+    <!-- if (Math.abs(lookVector.x) <= JOYSTICK_EPS) lookVector.x = 0; -->
+    <!-- if (Math.abs(lookVector.y) <= JOYSTICK_EPS) lookVector.y = 0; -->
+    <!-- lookVector.multiplyScalar(this.data.rotationSensitivity * dt / 1000); -->
+    <!-- this.el.object3D.rotation.y -= lookVector.x; -->
+
     const lookVector = this._lookVector;
     this.getJoystick(lookVector);
-    if (Math.abs(lookVector.x) <= JOYSTICK_EPS) lookVector.x = 0;
-    if (Math.abs(lookVector.y) <= JOYSTICK_EPS) lookVector.y = 0;
-    lookVector.multiplyScalar(this.data.rotationSensitivity * dt / 1000);
-    this.el.object3D.rotation.y -= lookVector.x;
+    var controls = document.querySelector('a-entity[camera]')
+    controls.components['look-controls'].pitchObject.rotation.x = lookVector.x
+    controls.components['look-controls'].yawObject.rotation.y = lookVector.y
+
+    
   },
 
   /**
@@ -108,13 +116,16 @@ AFRAME.registerComponent("rotation-controls", {
    * @return {THREE.Vector2}
    */
   getJoystick: function (target) {
+    <!-- const gamepad = this.getGamepad(); -->
+    <!-- if (gamepad.mapping === 'xr-standard') { -->
+      <!-- // See: https://github.com/donmccurdy/aframe-extras/issues/307 -->
+      <!-- return target.set(gamepad.axes[2], gamepad.axes[3]); -->
+    <!-- } else { -->
+      <!-- return target.set(gamepad.axes[0], gamepad.axes[1]); -->
+    <!-- } -->
+    
     const gamepad = this.getGamepad();
-    if (gamepad.mapping === 'xr-standard') {
-      // See: https://github.com/donmccurdy/aframe-extras/issues/307
-      return target.set(gamepad.axes[2], gamepad.axes[3]);
-    } else {
-      return target.set(gamepad.axes[0], gamepad.axes[1]);
-    }
+    return target.set(gamepad.axes[0], gamepad.axes[1],gamepad.axes[2],gamepad.axes[3]);
   },
 
   /**
@@ -146,8 +157,8 @@ AFRAME.registerComponent("rotation-controls", {
     <!-- <a-scene　vr-mode-ui="enabled: false" > -->
     <a-scene>
     
-        <a-entity id="rig" rotation="270 0 0" position="0 2 0" rotation-controls="enabed">
-        <a-entity camera look-controls="magicWindowTrackingEnabled: false; touch1Enabled: false" >
+        <a-entity id="rig" rotation="270 0 0" position="0 2 0" rotation-controls="enabed" >
+        <a-entity camera look-controls="magicWindowTrackingEnabled: false; touchEnabled: false" >
              <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
         </a-entity>
       </a-entity>
