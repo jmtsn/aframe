@@ -222,23 +222,7 @@ AFRAME.registerComponent("rotation-controls", {
 
               <!-- <button id="btnid" class="btnsyl">Restart</button> -->
 
-<script>
 
-document.addEventListener("DOMContentLoaded", function(){
-
-let btn = document.getElementById("btnid");
-
-btn.addEventListener('click', () => {
-    var controls = document.querySelector('a-entity[camera]')
-    controls.components['look-controls'].pitchObject.rotation.x = 0 //- * ( Math.PI / 180 )
-    controls.components['look-controls'].yawObject.rotation.y = 0
-    controls.setAttribute("position",{x:0, y:0, z:0})
-    return;
-});
-
-}, false);
-
-</script>
 
 
   </body>
