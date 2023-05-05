@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad1111</title>
+    <title>pad</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script> -->
     <!-- <script src="js.js"></script> -->
@@ -36,7 +36,7 @@
     color: #000;
     border-radius: 10px;
     position: absolute;
-    left: 60%;
+    left: 70%;
     transform: translateX(-50%);
     bottom: 5%
   }
@@ -155,6 +155,7 @@ const gameLoop = () => {
 
   rx = controls.components['look-controls'].pitchObject.rotation.x 
   ry = controls.components['look-controls'].yawObject.rotation.y
+
   document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
 
   //rx = rx + gp.axes[0] * 5 * ( Math.PI / 180 );
@@ -166,11 +167,14 @@ const gameLoop = () => {
 document.getElementById("tmp-text").innerText = "GP: Connecting...";
 window.addEventListener("gamepadconnected", (e) => {
       document.getElementById("tmp-text").innerText = "GP: Connected";
-      gameLoop();
-      document.getElementById("tmp-text").innerText = "GP: LoopFinished";
     }, document.getElementById("tmp-text").innerText = "GP: NotFound");
 
 }, false);
+
+const haveEvents = 'ongamepadconnected' in window;
+if (!haveEvents) {
+ setInterval(gameLoop, 500);
+}
 
 </script>
 
