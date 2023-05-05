@@ -26,20 +26,36 @@
     transform: translateX(-50%);
     bottom: 5%
   }
+  
+    .cntsyl{
+    border: 0;
+    line-height: 2.5;
+    padding: 0 0px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    position: absolute;
+    left: 60%;
+    transform: translateX(-50%);
+    bottom: 5%
+  }
   </style>
 
 <body>
-  
+
     <!-- <a-scene　vr-mode-ui="enabled: false" > -->
     <a-scene>
 
         <a-entity id="rig" rotation="270 0 0" position="0 2 0" rotation-controls="enabed" >
         <a-entity camera look-controls="magicWindowTrackingEnabled: false; touchEnabled: false" >
-             <a-cursor fuse=“true” fuse-timeout=“100”></a-cursor>
+             <a-entity cursor="fuse: true; fuseTimeout: 500" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat" position="0 0 -1"></a-entity>
         </a-entity>
       </a-entity>
             
       <a-sphere color="red" radius="0.05" position="0 0 0" shadow="receive: true"
+          counter
+          raycaster="objects: .clickable"
           animation__1="property: components.material.material.color;
           type: color;
           to: blue;
@@ -56,6 +72,8 @@
       
       
       <a-sphere color="yellow" radius="0.05" position="1 0 0" shadow="receive: true"
+          counter
+          raycaster="objects: .clickable"
           animation__1="property: components.material.material.color;
           type: color;
           to: blue;
@@ -71,6 +89,8 @@
       </a-sphere>
       
       <a-sphere color="yellow" radius="0.05" position="0 0 -1" shadow="receive: true"
+          counter
+          raycaster="objects: .clickable"
           animation__1="property: components.material.material.color;
           type: color;
           to: blue;
@@ -89,7 +109,6 @@
 
     </a-scene>
 
-              <button id="btnid" class="btnsyl">Restart</button>
 
 <script>
 
@@ -137,6 +156,22 @@ window.addEventListener("gamepadconnected", (e) => {
       gameLoop();
     });
 </script>
+
+<script>
+c = -1;
+AFRAME.registerComponent('counter', {
+  init: function () {
+    this.el.addEventListener('click', function (event) {
+    console.log("clicked");
+    c++;
+    document.getElementById("cnter").innerText = "count: " + c;
+    });
+  }
+});
+</script>
+
+  <button id="btnid" class="btnsyl">Restart</button>
+  <div id="cnter" class="cntsyl"></div>
 
 
   </body>
