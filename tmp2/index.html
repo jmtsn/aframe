@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad</title>
+    <title>pad1</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script> -->
     <!-- <script src="js.js"></script> -->
@@ -171,8 +171,10 @@ window.addEventListener("gamepadconnected", (e) => {
 
 }, false);
 
-const haveEvents = 'ongamepadconnected' in window;
+const haveEvents = 'gamepadconnected' in window;
+<!-- const haveEvents = 'ongamepadconnected' in window; -->
 if (!haveEvents) {
+ document.getElementById("tmp-text").innerText = "GP: LoopStarting";
  setInterval(gameLoop, 500);
 }
 
