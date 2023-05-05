@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>mediapipe</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script> -->
+    <!-- <script src="js.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+  </head>
+
+  <style>
+  .btnsyl{
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5%
+  }
+  
+    .cntsyl{
+    border: 0;
+    line-height: 2.5;
+    padding: 0 0px;
+    font-size: 1rem;
+    text-align: center;
+    color: #000;
+    border-radius: 10px;
+    position: absolute;
+    left: 70%;
+    transform: translateX(-50%);
+    bottom: 5%
+  }
+  
+   .txtsyl{
+    border: 0;
+    line-height: 2.5;
+    padding: 0 0px;
+    font-size: 1rem;
+    text-align: center;
+    color: #000;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10%
+  }
+  </style>
+
+<body>
+    <!-- <a-scene vr-mode-ui="enabled: false"> -->
+    <a-scene>
+
+      <a-entity rotation="0 0 0" position="0 0 0" >
+        <!-- <a-entity camera look-controls="magicWindowTrackingEnabled: false; touchEnabled: false" > -->
+        <a-entity camera look-controls >
+             <a-entity cursor="fuse: true; fuseTimeout: 500" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat" position="0 0 -1"></a-entity>
+        </a-entity>
+      </a-entity>
+            
+      <a-sphere color="red" radius="0.1" position="0 0 0" shadow="receive: true"
+          counter
+          raycaster="objects: .clickable"
+          animation__1="property: components.material.material.color;
+          type: color;
+          to: blue;
+          dur: 200;
+          startEvents: mouseenter;"
+          
+          animation__0="property: components.material.material.color;
+          type: color;
+          to: red;
+          dur: 200;
+          startEvents: mouseleave;"
+          >
+      </a-sphere>
+      
+      
+      <!-- <a-sphere color="yellow" radius="0.1" position="1 0 0" shadow="receive: true" -->
+          <!-- counter -->
+          <!-- raycaster="objects: .clickable" -->
+          <!-- animation__1="property: components.material.material.color; -->
+          <!-- type: color; -->
+          <!-- to: blue; -->
+          <!-- dur: 200; -->
+          <!-- startEvents: mouseenter;" -->
+          
+          <!-- animation__0="property: components.material.material.color; -->
+          <!-- type: color; -->
+          <!-- to: yellow; -->
+          <!-- dur: 200; -->
+          <!-- startEvents: mouseleave;" -->
+          <!-- > -->
+      <!-- </a-sphere> -->
+      
+      <!-- <a-sphere color="yellow" radius="0.1" position="0 0 -1" shadow="receive: true" -->
+          <!-- counter -->
+          <!-- raycaster="objects: .clickable" -->
+          <!-- animation__1="property: components.material.material.color; -->
+          <!-- type: color; -->
+          <!-- to: blue; -->
+          <!-- dur: 200; -->
+          <!-- startEvents: mouseenter;" -->
+          
+          <!-- animation__0="property: components.material.material.color; -->
+          <!-- type: color; -->
+          <!-- to: yellow; -->
+          <!-- dur: 200; -->
+          <!-- startEvents: mouseleave;" -->
+          <!-- > -->
+      <!-- </a-sphere> -->
+      
+      <!-- <a-plane position="0 -0.1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+
+    </a-scene>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let btn = document.getElementById("btnid");
+
+btn.addEventListener('click', () => {
+    var controls = document.querySelector('a-entity[camera]')
+    controls.components['look-controls'].pitchObject.rotation.x = 0 //- * ( Math.PI / 180 )
+    controls.components['look-controls'].yawObject.rotation.y = 0
+    controls.setAttribute("position",{x:0, y:0, z:0})
+    return;
+});
+
+}, false);
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+
+    const gameLoop = () => {
+      const gamepads = navigator.getGamepads
+        ? navigator.getGamepads()
+        : [];
+
+      const gp = gamepads[0];
+      const rt = 0.005
+      
+      var controls = document.querySelector('a-entity[camera]');
+
+      rx = controls.components['look-controls'].pitchObject.rotation.x;
+      ry = controls.components['look-controls'].yawObject.rotation.y;
+
+      //document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
+      //document.getElementById("tmp-text").innerText = "rxy: "+rx+" "+ry;
+      
+      if((rx<rt)&&(rx>-rt)) rx=0;
+      if((ry<rt)&&(ry>-rt)) ry=0;
+
+      controls.components['look-controls'].pitchObject.rotation.x = rx - gp.axes[0] * ( Math.PI / 180 );
+      controls.components['look-controls'].yawObject.rotation.y = ry + gp.axes[1] *  ( Math.PI / 180 );
+      }
+    
+
+
+    document.getElementById("tmp-text").innerText = "GP: Connecting...";
+    window.addEventListener("gamepadconnected", (e) => {
+          document.getElementById("tmp-text").innerText = "GP: Connected";
+          setInterval(gameLoop, 20);
+          document.getElementById("tmp-text").innerText = "GP: LoopFinished";
+        }, document.getElementById("tmp-text").innerText = "GP: NotFound");
+
+
+}, false);
+
+
+</script>
+
+<script>
+c = -1;
+AFRAME.registerComponent('counter', {
+  init: function () {
+    this.el.addEventListener('click', function (event) {
+    c++;
+    document.getElementById("cnter").innerText = "count: " + c;
+    });
+  }
+});
+</script>
+
+<script>
+
+const state = {
+    handSpheres: [],
+    sceneElement: null,
+    cameraElement: null,
+    isMobile: false,
+}
+
+const createSphere = (attributes) => {
+    const sphere = document.createElement('a-sphere')
+    for (const key in attributes) {
+        sphere.setAttribute(key, attributes[key])
+    }
+    state.sceneElement.appendChild(sphere)
+    return sphere
+}
+
+const getHandsSpheres = (landmarks) => {
+    landmarks.forEach((landmark) => {
+        const sphere = createSphere({
+            position: { x: landmark.x, y: landmark.y, z: landmark.z },
+            radius: 0.01,
+            color: '#000',
+            ['ammo-body']: 'type: kinematic',
+            ['ammo-shape']: 'type: sphere'
+        })
+        state.handSpheres.push(sphere)
+    })
+}
+
+const onResults = (results) => {
+    if (results.multiHandLandmarks) {
+        for (const landmarks of results.multiHandLandmarks) {
+
+            if (state.handSpheres.length <= 0) {
+                getHandsSpheres(landmarks)
+            }
+            
+            state.handSpheres.forEach((sphere, i) => {
+                sphere.setAttribute('position', {
+                    x: landmarks[i].x ,
+                    y: landmarks[i].y ,
+                    z: landmarks[i].z ,
+                })
+            })
+        }
+    }
+}
+
+const init = () => {
+    state.sceneElement = document.querySelector('a-scene')
+    state.cameraElement = document.querySelector('#camera')
+    
+    state.isMobile = AFRAME.utils.device.isMobile ()
+
+    const videoElement = document.querySelector('#input-video')
+
+    const hands = new Hands({
+        locateFile: (file) => {
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+        }
+    })
+    
+    hands.setOptions({
+        maxNumHands: 1,
+        modelComplexity: 1,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5
+    })
+    hands.onResults(onResults)
+
+    const camera = new Camera(videoElement, {
+        onFrame: async () => {
+            await hands.send({ image: videoElement })
+        },
+        width: 500,
+        height: 500
+    })
+    camera.start()
+}
+
+window.onload = init
+</script>
+
+
+  <button id="btnid" class="btnsyl">Restart</button>
+  <div id="cnter" class="cntsyl"></div>
+  <div id="tmp-text" class="txtsyl"></div>
+
+    <div class="container">
+      <video id="input-video" style="display: none"></video>
+      <canvas id="output-canvas" style="display: none"></canvas>
+    </div>
+
+  </body>
+
+
+</html>
+
+ 
