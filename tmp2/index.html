@@ -150,20 +150,21 @@ const gameLoop = () => {
     : [];
 
   const gp = gamepads[0];
+  const rx0 = gp.axes[0];
+  const ry0 = gp.axes[1];
   
   var controls = document.querySelector('a-entity[camera]');
 
   rx = controls.components['look-controls'].pitchObject.rotation.x;
   ry = controls.components['look-controls'].yawObject.rotation.y;
 
-  document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
+  //document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
   //document.getElementById("tmp-text").innerText = "rxy: "+rx+" "+ry;
-  //document.getElementById("tmp-text").innerText = "ri: "+gp.axes.length;
 
-  rc = gp.axes.length/2
-  controls.components['look-controls'].pitchObject.rotation.x = rx + gp.axes[0] * ( Math.PI / 180 );
-  controls.components['look-controls'].yawObject.rotation.y = ry - gp.axes[1] *  ( Math.PI / 180 );
-
+  if( (gp.axes[0]!=cx0)&&(gp.axse[1]!=cy0)){
+    controls.components['look-controls'].pitchObject.rotation.x = rx - gp.axes[0] *10* ( Math.PI / 180 );
+    controls.components['look-controls'].yawObject.rotation.y = ry + gp.axes[1] *10*  ( Math.PI / 180 );
+  }
 };
 
 
