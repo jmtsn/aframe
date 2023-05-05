@@ -156,11 +156,13 @@ const gameLoop = () => {
   rx = controls.components['look-controls'].pitchObject.rotation.x;
   ry = controls.components['look-controls'].yawObject.rotation.y;
 
-  //document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
+  document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
   //document.getElementById("tmp-text").innerText = "rxy: "+rx+" "+ry;
+  //document.getElementById("tmp-text").innerText = "ri: "+gp.axes.length;
 
-  controls.components['look-controls'].pitchObject.rotation.x = rx + gp.axes[0] * 5 * ( Math.PI / 180 );
-  controls.components['look-controls'].yawObject.rotation.y = ry + gp.axes[1] * 5 * ( Math.PI / 180 );
+  rc = gp.axes.length/2
+  controls.components['look-controls'].pitchObject.rotation.x = rx + gp.axes[0] * ( Math.PI / 180 );
+  controls.components['look-controls'].yawObject.rotation.y = ry - gp.axes[1] *  ( Math.PI / 180 );
 
 };
 
