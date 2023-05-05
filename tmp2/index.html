@@ -155,10 +155,10 @@ document.addEventListener("DOMContentLoaded", function(){
       
       var controls = document.querySelector('a-entity[camera]');
 
-      rx = controls.components['look-controls'].pitchObject.rotation.x;
-      ry = controls.components['look-controls'].yawObject.rotation.y;
+      <!-- rx = controls.components['look-controls'].pitchObject.rotation.x; -->
+      <!-- ry = controls.components['look-controls'].yawObject.rotation.y; -->
 
-      //document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
+      document.getElementById("tmp-text").innerText = "GP: "+gp.axes[0]+" "+gp.axes[1];
       //document.getElementById("tmp-text").innerText = "rxy: "+rx+" "+ry;
 
       <!-- if( (gp.axes[0] != rx0) && (gp.axse[1] != ry0) ){ -->
