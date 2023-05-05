@@ -64,14 +64,14 @@
     <!-- <a-scene vr-mode-ui="enabled: false"> -->
     <a-scene>
 
-      <a-entity rotation="0 0 0" position="0 0 0" >
+      <a-entity rotation="0 0 0" position="0 1.6 0" >
         <!-- <a-entity camera look-controls="magicWindowTrackingEnabled: false; touchEnabled: false" > -->
         <a-entity camera look-controls >
              <a-entity cursor="fuse: true; fuseTimeout: 500" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat" position="0 0 -1"></a-entity>
         </a-entity>
       </a-entity>
             
-      <a-sphere color="red" radius="0.1" position="0 0 0" shadow="receive: true"
+      <a-sphere color="red" radius="0.1" position="0 0 -2" shadow="receive: true"
           counter
           raycaster="objects: .clickable"
           animation__1="property: components.material.material.color;
@@ -123,7 +123,7 @@
           <!-- > -->
       <!-- </a-sphere> -->
       
-      <!-- <a-plane position="0 -0.1 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+      <a-plane position="0 -0.1 0" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
 
     </a-scene>
 
@@ -241,9 +241,9 @@ const onResults = (results) => {
             
             state.handSpheres.forEach((sphere, i) => {
                 sphere.setAttribute('position', {
-                    x: landmarks[i].x ,
-                    y: landmarks[i].y ,
-                    z: landmarks[i].z ,
+                    x: -landmarks[i].x ,
+                    y: -landmarks[i].y +2,
+                    z: landmarks[i].z -1,
                 })
             })
         }
