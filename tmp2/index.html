@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>pad11</title>
+    <title>pad111</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script> -->
     <!-- <script src="js.js"></script> -->
@@ -167,6 +167,7 @@ document.getElementById("tmp-text").innerText = "GP: Connecting...";
 window.addEventListener("gamepadconnected", (e) => {
       document.getElementById("tmp-text").innerText = "GP: Connected";
       gameLoop();
+      document.getElementById("tmp-text").innerText = "GP: LoopFinished");
     }, document.getElementById("tmp-text").innerText = "GP: NotFound");
 
 }, false);
