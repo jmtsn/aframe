@@ -172,9 +172,8 @@ document.addEventListener("DOMContentLoaded", function(){
                 
           const rx0 = navigator.getGamepads()[0].axes[0];
           const ry0 = navigator.getGamepads()[0].axes[1];
-          document.getElementById("tmp-text").innerText = "rxy: "+rx0+" "+ry0;
           setInterval(gameLoop, 20);
-          document.getElementById("tmp-text").innerText = "GP: LoopFinished";
+          document.getElementById("tmp-text").innerText = "rxy: "+rx0+" "+ry0;
         }, document.getElementById("tmp-text").innerText = "GP: NotFound");
 
 
